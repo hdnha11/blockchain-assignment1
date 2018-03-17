@@ -1,0 +1,11 @@
+.ballPicker {
+  padding: 10px;
+}
+
+.ball + .ball {
+  margin-left: 5px;
+}
+
+.buyingTicket {
+  margin-top: 50px;
+}

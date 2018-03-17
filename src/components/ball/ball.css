@@ -1,0 +1,19 @@
+.ball {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  color: #fefefe;
+  font-size: 2.2rem;
+  user-select: none;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover,
+  & .selected {
+    filter: grayscale(80%);
+    transform: translateY(-5px);
+  }
+}

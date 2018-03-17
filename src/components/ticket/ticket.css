@@ -1,0 +1,90 @@
+.ticket {
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 20px;
+  min-width: 500px;
+  display: inline-flex;
+
+  &.error {
+    border: 1px solid #f44336;
+  }
+}
+
+.ball {
+  margin-right: 20px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.player {
+  flex: 1;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button {
+  display: inline-block;
+  text-decoration: none;
+  color: #fff;
+  background-color: #26a69a;
+  text-align: center;
+  letter-spacing: 0.5px;
+  border: none;
+  border-radius: 2px;
+  height: 36px;
+  line-height: 36px;
+  padding: 0 2rem;
+  font-size: 1rem;
+  outline: 0;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  transition: 0.3s ease-out;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #2bbbad;
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12),
+      0 3px 1px -1px rgba(0, 0, 0, 0.2);
+  }
+
+  &.red {
+    background-color: #ee6e73;
+
+    &:hover {
+      background-color: #ef9a9a;
+    }
+  }
+}
+
+.button + .button {
+  margin-left: 10px;
+}
+
+.amount {
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  cursor: default;
+  height: 34px;
+  outline: none;
+  color: #aaa;
+  padding: 0 10px;
+  margin: 20px 0 5px 0;
+  font-size: 1rem;
+}
+
+.etherUnit {
+  color: #aaa;
+  margin-bottom: 20px;
+}
+
+.errorMessage {
+  color: #f44336;
+  margin-top: 10px;
+}

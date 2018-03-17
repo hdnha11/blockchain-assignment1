@@ -5,12 +5,41 @@
   "main": "index.js",
   "scripts": {
     "build": "node scripts/build.js",
-    "deploy": "node scripts/deploy.js"
+    "deploy": "node scripts/deploy.js",
+    "dev": "parcel ./src/index.html",
+    "lint": "eslint ./src"
   },
   "author": "Nha Hoang",
   "license": "MIT",
   "dependencies": {
+    "classnames": "^2.2.5",
+    "humps": "^2.0.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.7",
+    "react-select": "^1.2.1",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.2",
+    "babel-plugin-syntax-object-rest-spread": "^6.13.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
     "chalk": "^2.3.2",
+    "cssnext": "^1.8.4",
+    "eslint": "^4.18.2",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
+    "node-sass": "^4.7.2",
+    "parcel-bundler": "^1.6.2",
+    "postcss-cssnext": "^3.1.0",
+    "postcss-modules": "^1.1.0",
+    "redux-devtools-extension": "^2.13.2",
     "rimraf": "^2.6.2",
     "solc": "^0.4.21",
     "web3": "^0.20.2"

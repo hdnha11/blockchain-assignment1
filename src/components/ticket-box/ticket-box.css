@@ -1,0 +1,13 @@
+.ticketBox {
+  padding: 10px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 200;
+  color: #546e7a;
+}
+
+.ticket + .ticket {
+  margin-top: 10px;
+}
