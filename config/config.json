@@ -1,7 +1,7 @@
 {
   "contracts": {
     "VirtLotto": {
-      "address": "0xecfcab0a285d3380e488a39b4bb21e777f8a4eac",
+      "address": "0xaa588d3737b611bafd7bd713445b314bd453a5c8",
       "abi": [
         {
           "constant": true,
@@ -25,8 +25,17 @@
         {
           "constant": false,
           "inputs": [],
-          "name": "generateWinner",
-          "outputs": [],
+          "name": "draw",
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256"
+            },
+            {
+              "name": "",
+              "type": "address[]"
+            }
+          ],
           "payable": false,
           "stateMutability": "nonpayable",
           "type": "function"
@@ -61,8 +70,13 @@
         },
         {
           "constant": true,
-          "inputs": [],
-          "name": "maxAmountOfTickets",
+          "inputs": [
+            {
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "name": "playerTicketsCount",
           "outputs": [
             {
               "name": "",
@@ -75,24 +89,11 @@
         },
         {
           "constant": true,
-          "inputs": [
-            {
-              "name": "",
-              "type": "address"
-            },
-            {
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "name": "tickets",
+          "inputs": [],
+          "name": "maxAmountOfTickets",
           "outputs": [
             {
-              "name": "amount",
-              "type": "uint256"
-            },
-            {
-              "name": "number",
+              "name": "",
               "type": "uint256"
             }
           ],
@@ -136,11 +137,15 @@
               "type": "uint256"
             }
           ],
-          "name": "players",
+          "name": "ticketTypes",
           "outputs": [
             {
-              "name": "",
-              "type": "address"
+              "name": "number",
+              "type": "uint256"
+            },
+            {
+              "name": "totalTickets",
+              "type": "uint256"
             }
           ],
           "payable": false,
@@ -175,6 +180,23 @@
           "payable": false,
           "stateMutability": "nonpayable",
           "type": "constructor"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "winner",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "winningNumber",
+              "type": "uint256"
+            }
+          ],
+          "name": "Win",
+          "type": "event"
         }
       ]
     }

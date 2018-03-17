@@ -7,8 +7,8 @@ module.exports = {
   CONFIG_PATH: path.resolve(__dirname, '../config/config.json'),
   params: {
     VirtLotto: [
-      150, // minimumBet
-      4 // maxAmountOfBets
+      150000000000000000, // minimumBet in wei = 150 finney
+      5 // maxAmountOfBets
     ]
   }
 };

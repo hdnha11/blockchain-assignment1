@@ -1,6 +1,23 @@
 pragma solidity ^0.4.20;
 
 contract VirtLotto {
+    struct Ticket {
+        address owner;
+        uint amount;
+        uint number;
+    }
+
+    struct TicketType {
+        uint number;
+        uint totalTickets;
+        mapping(uint => Ticket) tickets;
+    }
+
+    event Win(
+        address winner,
+        uint winningNumber
+    );
+
     address owner;
     uint minimumBet = 100 finney;
     uint public totalBet = 0;
@@ -8,14 +25,9 @@ contract VirtLotto {
     uint public maxAmountOfBets = 5;
     uint public constant maxAmountOfTickets = 4;
     uint public constant range = 10;
-    address[] public players;
-
-    struct Ticket {
-        uint amount;
-        uint number;
-    }
-
-    mapping(address => Ticket[]) public tickets;
+    address[] players;
+    mapping(uint => TicketType) public ticketTypes;
+    mapping(address => uint) public playerTicketsCount;
 
     modifier onlyOwner {
         require(msg.sender == owner);
@@ -39,11 +51,19 @@ contract VirtLotto {
         require(msg.value >= minimumBet);
         require(canPlay(msg.sender));
 
-        Ticket memory ticket = Ticket({amount: msg.value, number: number});
+        TicketType storage ticketType = ticketTypes[number];
 
-        tickets[msg.sender].push(ticket);
+        ticketType.tickets[ticketType.totalTickets] = Ticket({
+            owner: msg.sender,
+            amount: msg.value,
+            number: number
+        });
+        ticketType.totalTickets++;
+        playerTicketsCount[msg.sender]++;
 
-        players.push(msg.sender);
+        if (!playerExists(msg.sender)) {
+            players.push(msg.sender);
+        }
 
         totalBet += msg.value;
         numberOfBets++;
@@ -54,63 +74,77 @@ contract VirtLotto {
     }
 
     function canPlay(address player) public view returns (bool) {
-        Ticket[] storage playerTickets = tickets[player];
+        return playerTicketsCount[player] < maxAmountOfTickets;
+    }
 
-        if (playerTickets.length > maxAmountOfTickets) {
-            return false;
+    function draw() public onlyOwner returns (uint, address[]) {
+        uint winningNumber;
+        address[] memory winners;
+
+        (winningNumber, winners) = generateWinner();
+
+        return (winningNumber, winners);
+    }
+
+    function generateWinner() private returns (uint, address[]) {
+        uint winningNumber = generateRandomNumber();
+        address[] memory winners = distributePrizes(winningNumber);
+
+        return (winningNumber, winners);
+    }
+
+    function distributePrizes(uint winningNumber) private returns (address[]) {
+        TicketType storage ticketType = ticketTypes[winningNumber];
+        address[] memory winners = new address[](ticketType.totalTickets);
+
+        for (uint i = 0; i < ticketType.totalTickets; i++) {
+            address winner = ticketType.tickets[i].owner;
+            winners[i] = winner;
+            emit Win(winner, winningNumber);
         }
 
-        return true;
-    }
+        if (winners.length > 0) {
+            uint winnerEtherAmount = totalBet / winners.length;
 
-    function generateWinner() public onlyOwner {
-        uint winningNumber = (uint(keccak256(block.timestamp, block.difficulty)) % range) + 1;
+            resetGame();
+            totalBet = 0;
 
-        distributePrizes(winningNumber);
-    }
-
-    function distributePrizes(uint winningNumber) private {
-        address[] memory winners;
-        uint count;
-
-        (winners, count) = chooseWinners(winningNumber);
-
-        uint winnerEtherAmount = totalBet / winners.length;
-
-        resetGame();
-
-        for (uint i = 0; i < count; i++) {
-            if (winners[i] != address(0)) {
-                winners[i].transfer(winnerEtherAmount);
-            }
-        }
-    }
-
-    function chooseWinners(uint winningNumber) private view returns (address[], uint) {
-        address[] memory winners;
-        uint count;
-
-        for (uint i = 0; i < players.length; i++) {
-            address player = players[i];
-            for (uint j = 0; j < tickets[player].length; j++) {
-                Ticket storage ticket = tickets[player][j];
-                if (ticket.number == winningNumber) {
-                    winners[count] = player;
-                    count++;
+            for (i = 0; i < ticketType.totalTickets; i++) {
+                if (winners[i] != address(0)) {
+                    winners[i].transfer(winnerEtherAmount);
                 }
             }
+        } else {
+            resetGame();
         }
 
-        return (winners, count);
+        return winners;
+    }
+
+    function generateRandomNumber() private view returns (uint) {
+        return (uint(keccak256(block.timestamp, block.difficulty)) % range) + 1;
+    }
+
+    function playerExists(address player) private view returns (bool) {
+        for (uint i = 0; i < players.length; i++) {
+            if (players[i] == player) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     function resetGame() private {
-        for (uint i = 0; i < players.length; i++) {
-            address player = players[i];
-            delete tickets[player];
+        for (uint i = 1; i <= range; i++) {
+            delete ticketTypes[i];
         }
+
+        for (i = 0; i < players.length; i++) {
+            delete playerTicketsCount[players[i]];
+        }
+
         players.length = 0;
-        totalBet = 0;
         numberOfBets = 0;
     }
 }
