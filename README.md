@@ -8,10 +8,10 @@ Overview: Build a simple DApp that allows users to bet on which number will be s
 The following user stories must be completed:
 
 - [ ] The contract has one operation pickNumber(uint number) payable.
-* pickNumber should accept integer between 1 and 10 inclusive, and accept any amount of ether (minimum bet is X finney).
-* After Y calls to pickNumber, the contract will choose a random number.
-* X and Y are configurable in the constructor of the contract.
-The winner(s) get to keep all the money that has been pooled in the contract. If there is more than one winner, the prize money is split evenly.
+  * pickNumber should accept integer between 1 and 10 inclusive, and accept any amount of ether (minimum bet is X finney).
+  * After Y calls to pickNumber, the contract will choose a random number.
+  * X and Y are configurable in the constructor of the contract.
+  * The winner(s) get to keep all the money that has been pooled in the contract. If there is more than one winner, the prize money is split evenly.
 - [ ] Addresses are limited on the number of tickets. One address can only purchase a maximum of 4 tickets.
 - [ ] Users should be able to pick numbers via a simple web interface. A sample index.html will be provided to you by Wednesday.
 
