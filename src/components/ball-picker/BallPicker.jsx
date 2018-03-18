@@ -17,14 +17,16 @@ function* range(from, to) {
 
 const BallPicker = ({ buyingTicket, pickNumber }) => (
   <div className={styles.ballPicker}>
-    {[...range(1, 10)].map(number => (
-      <Ball
-        className={styles.ball}
-        key={number}
-        number={number}
-        onClick={() => pickNumber(number)}
-      />
-    ))}
+    <div>
+      {[...range(1, 10)].map(number => (
+        <Ball
+          className={styles.ball}
+          key={number}
+          number={number}
+          onClick={() => pickNumber(number)}
+        />
+      ))}
+    </div>
     {buyingTicket && (
       <Ticket className={styles.buyingTicket} ticket={buyingTicket} buying />
     )}

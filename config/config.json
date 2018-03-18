@@ -1,7 +1,7 @@
 {
   "contracts": {
     "VirtLotto": {
-      "address": "0xaa588d3737b611bafd7bd713445b314bd453a5c8",
+      "address": "0x8cdaf0cd259887258bc13a92c0a6da92698644c0",
       "abi": [
         {
           "constant": true,

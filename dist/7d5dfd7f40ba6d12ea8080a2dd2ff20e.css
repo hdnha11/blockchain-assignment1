@@ -158,11 +158,18 @@
 ._buyingTicket_g9qra_9 {
   margin-top: 50px;
 }
-._ticketBox_f0wk4_1 {
+._ticketBox_be2i8_1 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   padding: 10px;
 }
 
-._title_f0wk4_5 {
+._title_be2i8_7 {
   font-size: 24px;
   font-size: 24px;
   font-size: 1.5rem;
@@ -170,7 +177,7 @@
   color: #546e7a;
 }
 
-._ticket_f0wk4_1 + ._ticket_f0wk4_1 {
+._ticket_be2i8_1 + ._ticket_be2i8_1 {
   margin-top: 10px;
 }
 @import url('https://fonts.googleapis.com/css?family=Poiret+One|Quicksand');
