@@ -33,6 +33,9 @@ The following advanced user stories are optional. You're not required to do thes
 - [ ] Contract picks winner after 5 calls or 5 minutes, whichever happens first. To schedule calls, you might want to look into using the [Ethereum Alarm Clock](https://ethereum.stackexchange.com/a/87/20239).
 - [ ] Contract offers dynamic odds. Once a number is picked, the payout to the winners decreases and odds on others increase proportionally.
 
+## Walkthrough GIF
+
+![week1-assignment-walkthrough](https://user-images.githubusercontent.com/1773032/37561329-916e5464-2a7e-11e8-9608-73385046822c.gif)
 ## Development
 
 ### Build and Deploy the contract
